@@ -1,0 +1,70 @@
+version: '3'
+
+services:
+#     db:
+#         image: postgres
+#         container_name: django-react-db
+#         ports:
+#             - "5432:5432"
+#         volumes:
+#             - ./postgres/data:/var/lib/postgresql/data
+
+    api:
+        build: ./django/.
+        container_name: django-react-api
+        tty: true
+        command: python manage.py runserver 0.0.0.0:8000
+        ports:
+            - "8000:8000"
+        volumes:
+            - ./django:/app
+#         depends_on:
+#             - db
+
+#     web:
+#         build: ./react/.
+#         container_name: django-react-web
+#         restart: on-failure
+#         command: yarn start
+#         ports:
+#             - "3000:3000"
+#         volumes:
+#             - ./react:/app/src
+#         depends_on:
+#             - api
+
+
+# services:
+#     react-app:
+#         container_name: react_app
+#         restart: on-failure
+#         build: .
+#         volumes:
+#             - ./src:/app/src
+#         ports:
+#             - "3000:3000"
+#         command: >
+#             sh -c "yarn start"
+#     frontend:
+#         build: ./frontend
+#         command: ["npm", "start"]
+#         volumes:
+#             - ./frontend:/app/frontend
+#             - node-modules:/app/frontend/node_modules
+#         ports:
+#             - "3000:3000"
+
+# version: '3.9'
+# services:
+#     api:
+#         container_name: menu_api
+#         build: .
+#         restart: always
+#         env_file: .env
+#         ports:
+#             - "8000:8000"
+#         command: >
+#             sh -c " python manage.py migrate &&
+#               gunicorn restaurant.wsgi:application --bind 0.0.0.0:8000"
+#         volumes:
+#         - .:/app
