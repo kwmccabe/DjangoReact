@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+{% load static %}
+
+{% block title %}Polls - {{ block.super }}{% endblock %}
+
+{% block content_header %}
+    <h2>Polls</h2>
+{% endblock content_header %}
+
+{% block content %}
+    {% if poll_list %}
+        <div class="row">
+        {% for poll in poll_list %}
+            <div class="col-4">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ poll.poll_title }}</h5>
+                        <p class="card-text">{{ poll.cnt_questions }} Question{% if poll.cnt_questions != 1 %}s{% endif %}</p>
+                    </div>
+                    <div class="card-body text-center">
+                        <a href="{% url 'polls:vote' poll.id %}">Vote</a>
+                        |
+                        <a href="{% url 'polls:result' poll.id %}">Show Results</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    {% else %}
+        <p>No polls available at this time.</p>
+    {% endif %}
+{% endblock content %}

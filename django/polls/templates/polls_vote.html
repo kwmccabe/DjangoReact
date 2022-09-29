@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+{% load static %}
+
+{% block title %}Poll Vote - {{ block.super }}{% endblock %}
+
+{% block content_header %}
+    <h2>Vote - {{ poll.poll_title }}</h2>
+{% endblock content_header %}
+
+{% block content %}
+<form action="{% url 'polls:submitvote' poll.id %}" method="post">
+{% csrf_token %}
+{% for question in poll.question_set.all %}
+
+<div class="mb-3">
+    <label for="question-{{ question.id }}" class="form-label">{{ forloop.counter }}) {{ question.question_text }}</label>
+    {% for choice in question.choice_set.all %}
+    <div class="form-check">
+        <input type="radio" class="form-check-input" name="question-{{ question.id }}" id="question-{{ question.id }}-{{ choice.id }}" value="{{ choice.id }}">
+        <label for="question-{{ question.id }}-{{ choice.id }}">{{ choice.choice_text }}</label>
+    </div>
+    {% endfor %}
+</div>
+
+{% endfor %}
+<input type="submit" value="Submit Vote">
+</form>
+
+<br/>
+<a href="{% url 'polls:result' poll.id %}">Show Results</a>
+
+<hr size="1">DEBUG
+<br>poll.id: {{ poll.id }}
+<br>poll.is_recent: {{ poll.is_recent }}
+<br>poll.cnt_questions: {{ poll.cnt_questions }}
+<br>poll.cnt_choices: {{ poll.cnt_choices }}
+<br>poll.cnt_votes: {{ poll.cnt_votes }}
+{% endblock content %}

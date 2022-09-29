@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% load bootstrap5 %}
+{% load static %}
+{% if 'use_i18n'|bootstrap_setting %}
+    {% load i18n %}
+    {% get_current_language as LANGUAGE_CODE %}
+{% endif %}
+<html lang="{{ LANGUAGE_CODE|default:'en_us' }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}DjangoApp{% endblock %}</title>
+    {% bootstrap_css %}
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+{% block navbar %}{% include "sitenav.html" %}{% endblock navbar %}
+
+<div id="main" class="container-fluid">
+    <div class="row">
+        <div id="content" class="col-md-12">
+{% block content_header %}{% endblock %}
+{% block messages %}{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}{% endblock messages %}
+<hr>
+{% block content %} CONTENT {% endblock %}
+<hr>
+{% block content_footer %}{% endblock %}
+        </div>
+    </div>
+</div>
+
+{% bootstrap_javascript %}
+{% block extra_script %}{% endblock %}
+</body>
+</html>

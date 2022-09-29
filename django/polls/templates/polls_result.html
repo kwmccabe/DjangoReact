@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+{% load static %}
+
+{% block title %}Poll Result - {{ block.super }}{% endblock %}
+
+{% block content_header %}
+    <h2>Result - {{ poll.poll_title }}</h2>
+{% endblock content_header %}
+
+{% block content %}
+<ol>
+{% for question in poll.question_set.all %}
+    <li>
+        <span>{{ question.question_text }}</span>
+        <ol type="a">
+        {% for choice in question.choice_set.all %}
+            <li>{{ choice.choice_text }} - {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+        {% endfor %}
+        </ol>
+    </li>
+{% endfor %}
+</ol>
+
+<a href="{% url 'polls:vote' poll.id %}">Vote again?</a>
+
+<hr size="1">DEBUG
+<br>poll.id: {{ poll.id }}
+<br>poll.is_recent: {{ poll.is_recent }}
+<br>poll.cnt_questions: {{ poll.cnt_questions }}
+<br>poll.cnt_choices: {{ poll.cnt_choices }}
+<br>poll.cnt_votes: {{ poll.cnt_votes }}
+<br>sql: {{ sql }}
+{% endblock content %}
