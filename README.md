@@ -3,7 +3,7 @@
 This project is based on the official [Django Tutorial](https://docs.djangoproject.com/en/4.1/intro/tutorial01/ "Writing your first Django app, part 1").  But, there are several enhancements:
 
 ### Docker-Compose
-- The project has been 'dockerized' into three containers : `db`, `api', and `web`.
+- The project has been 'dockerized' into three containers : `db`, `api`, and `web`.
 - `db` runs PostgreSQL on the official [postgres](https://hub.docker.com/_/postgres) image.
 - `api` runs Django on the official [python](https://hub.docker.com/_/python) image.
 - `web` runs ReactJS on the official [node](https://hub.docker.com/_/node) image.
