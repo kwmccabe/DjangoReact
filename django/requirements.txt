@@ -5,7 +5,4 @@ django-filter
 djangorestframework
 gunicorn
 markdown
-moment
 psycopg2
-
-# pytz==2017.3
