@@ -15,7 +15,7 @@ import APIPost from './APIPost';
 export default function Vote() {
     let { pollId } = useParams();
     let fetch_url = "http://127.0.0.1:8000/api/polls/"+pollId;
-    let post_url = "http://127.0.0.1:8000/api/polls/"+pollId+"/vote/";
+    let post_url = "http://127.0.0.1:8000/api/polls/"+pollId+"/submitvote/";
     const [data, loading, error] = APIFetch(fetch_url);
 
     const xtraData = {sent: new Date().toISOString(),};
