@@ -13,5 +13,5 @@ $CMD
 
 # python manage.py createsuperuser
 # U: admin
-# E: admin@mail.com
-# P: django
+# E: admin@admin.com
+# P: djangoadmin
