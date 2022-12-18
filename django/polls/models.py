@@ -69,7 +69,7 @@ class Question(models.Model):
         return Choice.objects.filter(question__pk = self.pk).aggregate(models.Sum('votes'))['votes__sum']
 
     @admin.display(description='Options')
-    def choices_summary(obj,max_choices=3):
+    def choices_summary(obj, max_choices=3):
         result = ''
         last_choice = ''
 #         max_choices = 3

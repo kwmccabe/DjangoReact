@@ -44,7 +44,7 @@ class PollModelTests(TestCase):
         is_recent() returns False for polls with future poll_date
         """
         time = timezone.now() + datetime.timedelta(days=30)
-        p = Poll(poll_title="FUTURE POLL",poll_date=time)
+        p = Poll(poll_title="FUTURE POLL", poll_date=time)
         self.assertIs(p.is_recent(), False)
 
     def test_is_recent_with_past_poll(self):
@@ -52,7 +52,7 @@ class PollModelTests(TestCase):
         is_recent() returns False for polls with past poll_date
         """
         time = timezone.now() + datetime.timedelta(days=-30)
-        p = Poll(poll_title="PAST POLL",poll_date=time)
+        p = Poll(poll_title="PAST POLL", poll_date=time)
         self.assertIs(p.is_recent(), False)
 
     def test_is_recent_with_current_poll(self):
@@ -60,7 +60,7 @@ class PollModelTests(TestCase):
         is_recent() returns True for polls within past day
         """
         time = timezone.now() - datetime.timedelta(hours=23, minutes=59, seconds=59)
-        p = Poll(poll_title="CURRENT POLL",poll_date=time)
+        p = Poll(poll_title="CURRENT POLL", poll_date=time)
         self.assertIs(p.is_recent(), True)
 
 
@@ -151,7 +151,7 @@ class PollIndexViewTests(TestCase):
 #         is_recent() returns False for questions with future poll_date
 #         """
 #         time = timezone.now() + datetime.timedelta(days=30)
-#         q = Question(question_text="Future question.",poll_date=time)
+#         q = Question(question_text="Future question.", poll_date=time)
 #         self.assertIs(q.is_recent(), False)
 #
 #     def test_is_recent_with_past_question(self):
@@ -159,7 +159,7 @@ class PollIndexViewTests(TestCase):
 #         is_recent() returns False for questions whose poll_date is older than 1 day.
 #         """
 #         time = timezone.now() - datetime.timedelta(days=1, seconds=1)
-#         q = Question(question_text="Past question.",poll_date=time)
+#         q = Question(question_text="Past question.", poll_date=time)
 #         self.assertIs(q.is_recent(), False)
 #
 #     def test_is_recent_with_recent_question(self):
@@ -167,7 +167,7 @@ class PollIndexViewTests(TestCase):
 #         is_recent() returns True for questions whose poll_date is within the last day.
 #         """
 #         time = timezone.now() - datetime.timedelta(hours=23, minutes=59, seconds=59)
-#         q = Question(question_text="Recent question.",poll_date=time)
+#         q = Question(question_text="Recent question.", poll_date=time)
 #         self.assertIs(q.is_recent(), True)
 
 

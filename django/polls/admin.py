@@ -30,14 +30,14 @@ class ChoiceAdmin(admin.ModelAdmin):
     search_fields = ['choice_text']
     ordering = ['question__poll__poll_title','question__question_sort','choice_text']
 
-    @admin.display(description='Poll',ordering='question__poll__poll_title')
+    @admin.display(description='Poll', ordering='question__poll__poll_title')
     def choice_list_poll(self, obj):
         return format_html('<a href="{}">{}</a>',
                 reverse('admin:polls_poll_change', args=(obj.question.poll.id,)),
                 obj.question.poll.poll_title
                 )
 
-    @admin.display(description='Question',ordering='question__question_sort')
+    @admin.display(description='Question', ordering='question__question_sort')
     def choice_list_question(self, obj):
         return format_html('{}) <a href="{}">{}</a>',
                 obj.question.question_sort,
@@ -45,13 +45,12 @@ class ChoiceAdmin(admin.ModelAdmin):
                 obj.question.question_text
                 )
 
-    @admin.display(description='Choice',ordering='choice_text')
+    @admin.display(description='Choice', ordering='choice_text')
     def choice_list_text(self, obj):
         return format_html('<a href="{}">{}</a>',
                 reverse('admin:polls_choice_change', args=(obj.id,)),
                 obj.choice_text
                 )
-
 
     # redirect to choice.question  on _save
     def response_add(self, request, obj, post_url_continue=None):
@@ -83,7 +82,7 @@ class QuestionRowAdmin(admin.TabularInline):
     ordering = ['question_sort','question_text']
 
     @admin.display(description='Choices')
-    def question_list_choices(self,obj):
+    def question_list_choices(self, obj):
         if not obj.id: return ''
         max_choices = 3
         return obj.choices_summary(max_choices=max_choices)
@@ -107,14 +106,14 @@ class QuestionAdmin(admin.ModelAdmin):
     search_fields = ['question_text']
     ordering = ['poll__poll_title','question_sort']
 
-    @admin.display(description='Poll',ordering='poll__poll_title')
+    @admin.display(description='Poll', ordering='poll__poll_title')
     def question_list_poll(self, obj):
         return format_html('<a href="{}">{}</a>',
                 reverse('admin:polls_poll_change', args=(obj.poll.id,)),
                 obj.poll.poll_title
                 )
 
-    @admin.display(description='Question',ordering='question_sort')
+    @admin.display(description='Question', ordering='question_sort')
     def question_list_text(self, obj):
         return format_html('{}) <a href="{}">{}</a>',
                 obj.question_sort,
@@ -123,10 +122,9 @@ class QuestionAdmin(admin.ModelAdmin):
                 )
 
     @admin.display(description='Choices')
-    def question_list_choices(self,obj):
+    def question_list_choices(self, obj):
         max_choices = 3
         return obj.choices_summary(max_choices=max_choices)
-
 
     # redirect to question.poll  on _save
     def response_add(self, request, obj, post_url_continue=None):
@@ -163,7 +161,7 @@ class PollAdmin(admin.ModelAdmin):
     search_fields = ['poll_title']
     ordering = ['poll_title']
 
-    @admin.display(description='Poll',ordering='poll_title')
+    @admin.display(description='Poll', ordering='poll_title')
     def poll_list_title(self, obj):
         return format_html('<a href="{}">{}</a>',
                 reverse('admin:polls_poll_change', args=(obj.id,)),
@@ -172,6 +170,6 @@ class PollAdmin(admin.ModelAdmin):
 
 
 ### REGISTER WITH ADMIN
-admin.site.register(Poll,PollAdmin)
-admin.site.register(Question,QuestionAdmin)
-admin.site.register(Choice,ChoiceAdmin)
+admin.site.register(Poll, PollAdmin)
+admin.site.register(Question, QuestionAdmin)
+admin.site.register(Choice, ChoiceAdmin)
